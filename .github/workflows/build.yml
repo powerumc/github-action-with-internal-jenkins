@@ -1,0 +1,23 @@
+name: Build github action with internal jenkins.
+
+on: [push, pull_request]
+
+jobs:
+  deployment:
+    # 아래의 runs-on 값은 self-hosted 로 설정해야 합니다.
+    runs-on: self-hosted
+
+    steps:
+    - name: Deploy Stage
+      uses: fjogeleit/http-request-action@v1
+      with:
+        # 아래 Jenkins URL 을 설정하세요.
+        url: 'http://xxxx.xxx.xxx.xxx:xxx/job/<NAME>/job/<JOB NAME>/build'
+
+        method: 'POST'
+
+        # 아래에 jenkins username 을 설정하세요.
+        username: '<JENKINS USERNAME>'
+
+        # 아래에 jenkins 사용자의  api token 을 설정하세요.
+        password: '<JENKINS API TOKEN>'
